@@ -10,28 +10,33 @@ for (const path in images) {
 
 function ProductCard({ product, addToCart }) {
   return (
-    <>
-   <div className="w-full bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition">
-  <img
-    src={imageMap[product.image.thumbnail.split("/").pop()]}
-    alt={product.name}
-    className="w-full h-48 object-contain p-4"
-  />
-  <div className="p-4 space-y-2">
-    <p className="text-xs text-gray-500">{product.category}</p>
-    <h2 className="text-lg font-semibold text-black">{product.name}</h2>
-    <p className="text-orange-600 font-bold text-lg">${product.price.toFixed(2)}</p>
-    <button
-      onClick={() => addToCart(product)}
-      className="w-full bg-white text-black border border-gray-300 py-2 rounded-4xl hover:bg-orange-600 hover:text-white transition"
-    >
-        <span className="text-orange-500"><ShoppingCart className="inline mr-2" size={16} /></span>
-    Add to Cart
-    </button>
-  </div>
-</div>
-
-    </>
+    <div className="w-full bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-shadow duration-300 hover:scale-105">
+      <div className="relative">
+        <img
+          src={imageMap[product.image.desktop.split("/").pop()]}
+          alt={product.name}
+          className="w-full h-48 object-contain p-4"
+        />
+        <div className="absolute top-[81%] left-1/5  rounded-full p-2">
+        <button
+          onClick={() => addToCart(product)}
+          className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-2 px-4 rounded-full font-semibold hover:bg-[#C73B0F] hover:text-white focus:outline-none"
+        >
+          <ShoppingCart size={18} className="text-orange-500" />
+          Add to Cart
+        </button>
+        </div>
+      </div>
+      <div className="p-4">
+        <h2 className="text-lg font-semibold text-black mb-2">
+          {product.name}
+        </h2>
+        <p className="text-gray-600 mb-2">{product.category}</p>
+        <p className="text-orange-600 font-bold text-xl mb-4">
+          ${product.price.toFixed(2)}
+        </p>
+      </div>
+    </div>
   );
 }
 
