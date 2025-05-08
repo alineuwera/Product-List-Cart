@@ -10,7 +10,7 @@ function App() {
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.name === product.name);
-      
+
       if (existingItem) {
         return prevItems.map((item) =>
           item.name === product.name
@@ -26,7 +26,7 @@ function App() {
   const removeFromCart = (productName) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.name === productName);
-      
+
       if (existingItem && existingItem.quantity > 1) {
         return prevItems.map((item) =>
           item.name === productName
@@ -54,7 +54,8 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen bg-[#F9F5F1] p-4 md:p-8">
+      <h1 className="text-4xl font-bold pb-5 pl-22">Desserts</h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <ProductList addToCart={addToCart} />

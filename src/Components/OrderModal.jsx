@@ -13,7 +13,7 @@ function OrderModal({ isOpen, onClose, cartItems = [], totalPrice = 0 }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-lg">
         {/* Header with Checkmark */}
         <div className="flex justify-start mb-4">
@@ -72,7 +72,7 @@ function OrderModal({ isOpen, onClose, cartItems = [], totalPrice = 0 }) {
         {/* Start New Order Button */}
         <button
           onClick={onClose}
-          className="bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-500 w-full font-semibold"
+          className="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-500 w-full font-semibold"
         >
           Start New Order
         </button>
