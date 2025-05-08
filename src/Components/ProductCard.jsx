@@ -1,5 +1,4 @@
 import React from "react";
-import { ShoppingCart } from "lucide-react";
 const images = import.meta.glob("../assets/images/*", { eager: true });
 
 const imageMap = {};
@@ -12,19 +11,21 @@ function ProductCard({ product, addToCart }) {
   return (
     <div className="w-full bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-shadow duration-300 hover:scale-105">
       <div className="relative">
-        <img
-          src={imageMap[product.image.desktop.split("/").pop()]}
-          alt={product.name}
-          className="w-full h-48 object-contain p-4"
-        />
-        <div className="absolute top-[81%] left-1/5  rounded-full p-2">
-        <button
-          onClick={() => addToCart(product)}
-          className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-2 px-4 rounded-full font-semibold hover:bg-[#C73B0F] hover:text-white focus:outline-none"
-        >
-          <ShoppingCart size={18} className="text-orange-500" />
-          Add to Cart
-        </button>
+        <div>
+          <img
+            src={imageMap[product.image.desktop.split("/").pop()]}
+            alt={product.name}
+            className="w-full h-48 object-contain p-4"
+          />
+        </div>
+        <div className="absolute top-[81%] left-1/5 rounded-full p-2">
+          <button
+            onClick={() => addToCart(product)}
+            className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-2 px-4 rounded-full font-semibold hover:bg-orange-600 hover:text-white focus:outline-none transition-colors"
+          >
+            <img src="public/icon-add-to-cart.svg" alt="Add to cart" />
+            Add to Cart
+          </button>
         </div>
       </div>
       <div className="p-4">

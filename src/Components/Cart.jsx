@@ -1,10 +1,6 @@
-function Cart({
-  cartItems = [],
-  removeFromCart,
-  confirmOrder,
-}) {
+function Cart({ cartItems = [], removeFromCart, confirmOrder }) {
   const totalPrice = cartItems.reduce(
-    (total, item) => total + (Number(item.price) || 0) * (item.quantity || 0),
+    (total, item) => total + (item.price * item.quantity),
     0
   );
 
@@ -12,65 +8,78 @@ function Cart({
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-lg w-full md:w-96">
-      <h2 className="text-xl font-bold mb-4 text-orange-600">
+      <h2 className="text-xl font-bold mb-6 text-orange-600">
         Your Cart ({totalItems})
       </h2>
 
       {cartItems.length === 0 ? (
-        <div className="flex flex-col items-center text-center text-gray-500">
+        <div className="flex flex-col items-center text-center text-gray-500 py-8">
           <img
-            src="public/illustration-empty-cart.svg"  
+            src="/illustration-empty-cart.svg"
             alt="Empty cart"
             className="w-32 h-32 mb-4"
           />
-          <p className="">Your added items will appear here</p>
+          <p className="text-gray-600">Your added items will appear here</p>
         </div>
       ) : (
-        <>
-          {cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex justify-between items-center py-2 border-b"
-            >
-              <div>
-                <h3 className="font-semibold text-black">{item.name}</h3>
-                <p className="text-sm text-gray-500 flex items-center gap-1">
-                  <span className="text-orange-600 font-bold">
-                    {item.quantity}x
-                  </span>
-                  <span>@ ${Number(item.price).toFixed(2)}</span>
-                  <span className="text-gray-400 ml-1">
-                    ${ (item.price * item.quantity).toFixed(2) }
-                  </span>
-                </p>
-              </div>
-
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className="text-gray-400 hover:text-red-500 text-xl"
+        <div className="space-y-6">
+          <div className="space-y-4">
+            {cartItems.map((item) => (
+              <div
+                key={`${item.id}-${item.name}`}
+                className="flex justify-between items-start"
               >
-                ×
-              </button>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-black text-lg">{item.name}</h3>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <p className="text-orange-600 font-bold">
+                      {item.quantity}x
+                    </p>
+                    <p className="text-gray-600">
+                      @ ${item.price.toFixed(2)}
+                    </p>
+                    <p className="text-gray-400 ml-auto">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
+                  {item.category && (
+                    <p className="text-sm text-gray-500 mt-1">{item.category}</p>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="text-gray-400 hover:text-red-500 text-2xl font-light"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-gray-200 pt-4">
+            <div className="flex justify-between items-center mb-6">
+              <p className="font-semibold text-gray-800">Order Total</p>
+              <p className="font-bold text-gray-800">${totalPrice.toFixed(2)}</p>
             </div>
-          ))}
 
-          <div className="flex justify-between items-center mt-4 font-semibold text-lg">
-            <p>Order Total</p>
-            <p>${totalPrice.toFixed(2)}</p>
+            <div className="bg-gray-50 rounded-lg p-3 text-sm text-gray-600 flex items-center gap-2 mb-6">
+              <img 
+                src="/icon-carbon-neutral.svg" 
+                alt="Carbon neutral" 
+                className="w-5 h-5"
+              />
+              <span>This is a <span className="font-semibold">carbon-neutral</span> delivery</span>
+            </div>
+
+            <button
+              onClick={confirmOrder}
+              className="bg-orange-600 rounded-full text-white py-3 w-full text-center text-lg hover:bg-orange-500 transition-colors font-semibold"
+            >
+              Confirm Order
+            </button>
           </div>
-
-          <div className="bg-gray-50 rounded-lg p-3 mt-4 text-sm text-gray-600 flex items-center gap-2">
-            <span className="text-green-500">🌱</span>
-            This is a <span className="font-semibold">carbon-neutral</span> delivery
-          </div>
-
-          <button
-            onClick={confirmOrder}
-            className="bg-orange-600 rounded-full text-white py-3 mt-5 w-full text-center text-lg hover:bg-orange-500 transition"
-          >
-            Confirm Order
-          </button>
-        </>
+        </div>
       )}
     </div>
   );
