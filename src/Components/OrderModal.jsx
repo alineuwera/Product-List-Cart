@@ -1,6 +1,5 @@
 import React from "react";
 
-// Import images dynamically
 const images = import.meta.glob("/src/assets/images/*", { eager: true });
 
 const imageMap = {};
@@ -15,14 +14,16 @@ function OrderModal({ isOpen, onClose, cartItems = [], totalPrice = 0 }) {
   return (
     <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-lg">
-        {/* Header with Checkmark */}
         <div className="flex justify-start mb-4">
           <img src="public/icon-order-confirmed.svg" alt="" />
         </div>
-        <h2 className="text-2xl font-bold mb-2 text-left text-gray-800">Order Confirmed</h2>
-        <p className="text-gray-500 mb-6 text-left">We hope you enjoy your food!</p>
+        <h2 className="text-2xl font-bold mb-2 text-left text-gray-800">
+          Order Confirmed
+        </h2>
+        <p className="text-gray-500 mb-6 text-left">
+          We hope you enjoy your food!
+        </p>
 
-        {/* Order Items List with Background */}
         <div className="bg-[#F9F5F1] rounded-lg p-4 text-left mb-6">
           {cartItems.length > 0 ? (
             cartItems.map((item, index) => (
@@ -63,13 +64,13 @@ function OrderModal({ isOpen, onClose, cartItems = [], totalPrice = 0 }) {
           )}
         </div>
 
-        {/* Order Total */}
         <div className="flex justify-between items-center mb-6">
           <p className="text-gray-600 font-semibold">Order Total</p>
-          <p className="text-xl font-bold text-gray-800">${totalPrice.toFixed(2)}</p>
+          <p className="text-xl font-bold text-gray-800">
+            ${totalPrice.toFixed(2)}
+          </p>
         </div>
 
-        {/* Start New Order Button */}
         <button
           onClick={onClose}
           className="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-500 w-full font-semibold"
