@@ -7,7 +7,7 @@ function Cart({ cartItems = [], removeFromCart, confirmOrder }) {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg w-full md:w-96">
+    <div className="bg-white rounded-xl p-6 shadow-lg w-full md:w-full ">
       <h2 className="text-xl font-bold mb-6 text-orange-600">
         Your Cart ({totalItems})
       </h2>
